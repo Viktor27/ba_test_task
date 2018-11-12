@@ -30,7 +30,7 @@ var price = 0;
 for (let i = 0; i < btns.length; i++) {
 
     var btn = btns[i];
-    
+
     btn.onclick = function () {
         var local_storage = {};
         var parent = this.parentElement;
@@ -42,10 +42,7 @@ for (let i = 0; i < btns.length; i++) {
         local_storage.name = product;
         local_storage.price = sum;
 
-        if (local_storage.name === local_storage.name) {
-            console.log(true);
-            
-        }
+      
       console.log(local_storage.name);
       
         storage.push(local_storage);
