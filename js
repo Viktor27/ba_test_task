@@ -1,3 +1,6 @@
+// Storage
+var storage = [];
+
 function findTotal() {
     var arr = document.getElementsByName("qty");
     var tot = 0;
@@ -11,79 +14,51 @@ function findTotal() {
     document.getElementById("total").innerHTML = tot;
 }
 
+//add unique ID to product items
+var items = document.getElementsByClassName('product-box__item');
+var j = 0;
+for (let i = 0; i < items.length; i++) {
+
+    var item = items[i];
+    j += 1;
+    item.id = 'prod' + j;
+
+}
 
 var btns = document.getElementsByTagName("button");
-
+var price = 0;
 for (let i = 0; i < btns.length; i++) {
+
     var btn = btns[i];
-    btn.addEventListener("click", function () {
-
+    
+    btn.onclick = function () {
+        var local_storage = {};
         var parent = this.parentElement;
-        var price = parent.firstChild.nextSibling.textContent;
-        price = price.match(/\d+/g).map(Number);
+        var product = parent.parentElement.id;
+        var prodPrice = parseInt(parent.firstChild.nextSibling.textContent);
         var input = parseInt(parent.childNodes[3].firstChild.nextSibling.value);
-        var sum = price * input;
+        var sum = prodPrice * input;
 
-        document.getElementById('total-price').innerHTML = sum;
-        
+        local_storage.name = product;
+        local_storage.price = sum;
 
-    });
-}
-
-==================================================================================================
-var sum = {};
-
-function findTotal() {
-    var arr = document.getElementsByName("qty");
-    var tot = 0;
-
-    for (var i = 0; i < arr.length; i++) {
-        if (parseInt(arr[i].value)) {
-            tot += parseInt(arr[i].value);
+        if (local_storage.name === local_storage.name) {
+            console.log(true);
+            
         }
-    }
+      console.log(local_storage.name);
+      
+        storage.push(local_storage);
+    //    for (let i = 0; i < storage.length; i++) {
+    //        const element = storage[i];
+           
+    //        console.log(element.name);
+    //    }
 
-    document.getElementById("total").innerHTML = tot;
-}
 
-// var prodList = document.getElementById('prod-list');
-// var products = document.getElementsByClassName('product-box__item');
- 
-// var j = 0;
-// for (let i = 0; i < products.length; i++) {
-//     var product = products[i];
-//     j = j + 1;
 
-//     product.id = 'prod' + j;
 
-// }
+        // document.getElementById('total-price').innerHTML = ???
 
-// prodList.addEventListener('click', function (event) {
-
-//     var elem = event.target.id || event.target.parentNode.id || event.target.parentNode.parentNode.id || event.target.parentNode.parentNode.parentNode.id;
-
-//     var productItem = getElementById(elem);
-
-//     var value = productItem.querySelector('input.qty__item');
-//     console.log(value); 
-// });
-var btns = document.getElementsByTagName("button"); 
-
-for (var i = 0; i < btns.length; i++) {
-    var btn = btns[i];
-
-    btn.addEventListener("click", function () {
-
-        var parent = this.parentElement;
-        var price = parent.firstChild.nextSibling.textContent;
-        price = price.match(/\d+/g).map(Number);
-        var input = parseInt(parent.childNodes[3].firstChild.nextSibling.value);
-        var sumProduct = price * input;
-        var prodID =7;
-        sum[prodID] = sumProduct;
-        
-        console.log(sum);
-        // document.getElementById('total-price').innerHTML = sumProduct;
-
-    });
+    };
 }
