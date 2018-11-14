@@ -24,7 +24,7 @@ for (var i = 0; i < productItems.length; i++) {
   item.id = "prod" + j;
 }
 //count && output
-var btns = document.getElementsByTagName("button");
+var btns = document.getElementsByClassName("product-box__btn");
 for (let i = 0; i < btns.length; i++) {
   var btn = btns[i];
 
@@ -47,7 +47,7 @@ for (let i = 0; i < btns.length; i++) {
   };
 }
 
-//filteer
+//filteer ¯\_(ツ)_/¯ I hope your eyes are not bleeding
 var selectCat = document.getElementById("select-cat");
 
 selectCat.onchange = function() {
@@ -68,14 +68,45 @@ selectCat.onchange = function() {
   }
 };
 
-// var selectPrice = document.getElementById("select-price");
-// var filteredProducts = document.querySelectorAll('js-show');
+var selectPrice = document.getElementById("select-price");
+var filteredProducts = document.getElementsByClassName("js-show");
 
-// selectPrice.onchange = function(){
-// 	selectedValue = this.value;
+selectPrice.onchange = function() {
+  selectedValue = this.value;
 
-// 	for (var i = 0; i < filteredProducts.length; i++) {
-// 		filteredProduct = filteredProducts[i];
-		
-// 	}
-// }
+  for (var i = 0; i < filteredProducts.length; i++) {
+    var filteredProduct = filteredProducts[i];
+    var filteredProductPrice = parseInt(
+      filteredProduct.querySelector(".price").innerHTML
+    );
+    console.log(filteredProductPrice, "---", selectedValue);
+    if (filteredProductPrice < selectedValue) {
+      filteredProduct.classList.remove("js-hide");
+      filteredProduct.classList.add("js-show");
+    } else if (selectedValue == 0) {
+      filteredProduct.classList.remove("js-hide");
+      filteredProduct.classList.add("js-show");
+    } else {
+      filteredProduct.classList.add("js-hide");
+    }
+  }
+};
+// ¯\_(ツ)_ /¯
+
+//modal window
+
+var orderBtn = document.getElementById("btn-check");
+var popup = document.getElementById("popup");
+
+orderBtn.onclick = function() {
+  popup.style.display = "block";
+};
+
+function validateForm() {
+  var orderForm = document.getElementById("order-form");
+  if (!orderForm.checkValidity()) {
+    alert("There was a problem with your submission");
+  } else {
+    alert("Thanks for order!!");
+  }
+}
